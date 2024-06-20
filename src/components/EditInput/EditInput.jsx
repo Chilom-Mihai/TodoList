@@ -3,15 +3,14 @@ import "./EditInput.css";
 import Button from "../Button/Button";
 
 const EditInput = (props) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(props.todoDesc);
   const handleInputValue = (e) => {
     setInputValue(e.target.value);
     // console.log(inputValue);
   };
   //sau putem sa trimitem printr-o functie
-  const handleAddTask = () => {
-    props.addTodo(inputValue);
-    setInputValue("");
+  const handleEditTask = () => {
+    props.editTodo(inputValue, props.id);
   };
   return (
     <div className="task">
@@ -21,7 +20,7 @@ const EditInput = (props) => {
         value={inputValue}
         onChange={handleInputValue}
       />
-      <Button buttonText={props.buttonText} clickFunction={handleAddTask} />
+      <Button buttonText={props.buttonText} clickFunction={handleEditTask} />
     </div>
   );
 };

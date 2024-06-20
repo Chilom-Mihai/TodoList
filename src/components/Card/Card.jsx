@@ -16,9 +16,20 @@ const Card = () => {
   };
   console.log(todoArray);
 
+  const editTask = (taskDesc, id) => {
+    setTodoarray(
+      todoArray.map((todo) =>
+        todo.id === id
+          ? { ...todo, todoDesc: taskDesc, isEditting: !todo.isEditting }
+          : todo
+      )
+    );
+  };
+
   const deleteTodo = (id) => {
     setTodoarray(todoArray.filter((todo) => todo.id !== id));
   };
+
   const editTodoMode = (id) => {
     setTodoarray(
       todoArray.map((todo) =>
@@ -31,6 +42,7 @@ const Card = () => {
       <h1 className="text-[2.7rem] font-semibold pb-5 text-center text-white">
         Get Things Done!
       </h1>
+
       <Input
         placeholderText="What is the task today?"
         buttonText="Add Task"
@@ -41,12 +53,15 @@ const Card = () => {
           <EditInput
             placeholderText="Edit your Task"
             buttonText="Edit Task"
-            addTodo={addTodo}
+            editTodo={editTask}
             key={index}
+            todoDesc={todo.todoDesc}
+            id={todo.id}
           />
         ) : (
           <Todo
             key={index}
+            b
             todoText={todo.todoDesc}
             deleteTask={deleteTodo}
             id={todo.id}
